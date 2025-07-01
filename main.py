@@ -1,81 +1,51 @@
-import data
 from selenium import webdriver
-from selenium.webdriver import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
-
-
-# no modificar
-def retrieve_phone_code(driver) -> str:
-    """Este código devuelve un número de confirmación de teléfono y lo devuelve como un string.
-    Utilízalo cuando la aplicación espere el código de confirmación para pasarlo a tus pruebas.
-    El código de confirmación del teléfono solo se puede obtener después de haberlo solicitado en la aplicación."""
-
-    import json
-    import time
-    from selenium.common import WebDriverException
-    code = None
-    for i in range(10):
-        try:
-            logs = [log["message"] for log in driver.get_log('performance') if log.get("message")
-                    and 'api/v1/number?number' in log.get("message")]
-            for log in reversed(logs):
-                message_data = json.loads(log)["message"]
-                body = driver.execute_cdp_cmd('Network.getResponseBody',
-                                              {'requestId': message_data["params"]["requestId"]})
-                code = ''.join([x for x in body['body'] if x.isdigit()])
-        except WebDriverException:
-            time.sleep(1)
-            continue
-        if not code:
-            raise Exception("No se encontró el código de confirmación del teléfono.\n"
-                            "Utiliza 'retrieve_phone_code' solo después de haber solicitado el código en tu aplicación.")
-        return code
-
-
-class UrbanRoutesPage:
-    from_field = (By.ID, 'from')
-    to_field = (By.ID, 'to')
-
-    def __init__(self, driver):
-        self.driver = driver
-
-    def set_from(self, from_address):
-        self.driver.find_element(*self.from_field).send_keys(from_address)
-
-    def set_to(self, to_address):
-        self.driver.find_element(*self.to_field).send_keys(to_address)
-
-    def get_from(self):
-        return self.driver.find_element(*self.from_field).get_property('value')
-
-    def get_to(self):
-        return self.driver.find_element(*self.to_field).get_property('value')
-
-
+from data import urban_routes_url, address_from, address_to, phone_number, card_number, card_code, message_for_driver
+from sms_code_fetcher import get_sms_code
+from methods import TaxiMethods
 
 class TestUrbanRoutes:
-
     driver = None
 
     @classmethod
     def setup_class(cls):
-        # no lo modifiques, ya que necesitamos un registro adicional habilitado para recuperar el código de confirmación del teléfono
-        from selenium.webdriver import DesiredCapabilities
-        capabilities = DesiredCapabilities.CHROME
-        capabilities["goog:loggingPrefs"] = {'performance': 'ALL'}
-        cls.driver = webdriver.Chrome(desired_capabilities=capabilities)
+        cls.driver = webdriver.Chrome()
+        cls.driver.get(urban_routes_url)
+        cls.driver.maximize_window()
+        cls.methods = TaxiMethods(cls.driver)
 
-    def test_set_route(self):
-        self.driver.get(data.urban_routes_url)
-        routes_page = UrbanRoutesPage(self.driver)
-        address_from = data.address_from
-        address_to = data.address_to
-        routes_page.set_route(address_from, address_to)
-        assert routes_page.get_from() == address_from
-        assert routes_page.get_to() == address_to
+    def test_1_enter_addresses(self):
+        self.methods.enter_addresses(address_from, address_to)
 
+    def test_2_select_comfort_tariff(self):
+        self.methods.select_comfort_tariff()
+
+    def test_3_enter_phone_number(self):
+        self.methods.enter_phone_number(phone_number)
+
+    def test_4_enter_sms_code(self):
+        code = get_sms_code(phone_number)
+        if code:
+            self.methods.enter_sms_code(code)
+        else:
+            print("[ERROR] No se obtuvo un código válido. Abortando ejecución.")
+            self.driver.quit()
+            assert False
+
+    def test_5_add_credit_card(self):
+        self.methods.add_credit_card(card_number, card_code)
+
+    def test_6_write_driver_message(self):
+        self.methods.write_driver_message(message_for_driver)
+
+    def test_7_toggle_blanket_and_tissues(self):
+        self.methods.toggle_blanket_and_tissues()
+
+    def test_8_add_ice_cream(self):
+        self.methods.add_ice_cream()
+
+    def test_9_confirm_trip_and_check_driver(self):
+        self.methods.confirm_trip()
+        assert self.methods.wait_for_driver_photo(timeout=40)
 
     @classmethod
     def teardown_class(cls):
