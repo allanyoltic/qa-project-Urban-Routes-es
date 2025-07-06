@@ -29,7 +29,7 @@ qa-project-urban-routes-es/
 ├── sms\_code\_fetcher.py      # API para obtener el código SMS
 ├── main.py                  # Archivo principal con pruebas estructuradas en Pytest
 ├── UrbanRoutesPage.py       # Dependencias del proyecto
-└── README.md                # Este archivo :)
+└── README.md                # Este archivo
 
 ````
 
