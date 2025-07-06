@@ -26,10 +26,10 @@ El proyecto realiza las siguientes acciones de forma automática:
 qa-project-urban-routes-es/
 │
 ├── data.py                  # Datos como URL base, número de teléfono, tarjeta, etc.
-├── sms\_code\_fetcher.py      # API para obtener el código SMS
+├── sms_code_fetcher.py      # API para obtener el código SMS
 ├── main.py                  # Archivo principal con pruebas estructuradas en Pytest
 ├── UrbanRoutesPage.py       # Dependencias del proyecto
-└── README.md                # Este archivo
+└── README.md                # Este archivo :)
 
 ````
 
@@ -49,9 +49,9 @@ qa-project-urban-routes-es/
    ```bash
    git clone https://github.com/tu-usuario/qa-project-urban-routes-es.git
    cd qa-project-urban-routes-es
-````
+   ```
 
-2. **Crea y activa un entorno virtual** (opcional pero recomendado):
+2. **Crea y activa un entorno virtual** (opcional pero recomendado)**:
 
    ```bash
    python -m venv .venv
