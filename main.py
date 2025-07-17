@@ -1,4 +1,3 @@
-import pytest
 from selenium import webdriver
 from data import urban_routes_url, address_from, address_to, phone_number, card_number, card_cvv, message_for_driver
 from sms_code_fetcher import get_sms_code
