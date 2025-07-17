@@ -6,7 +6,7 @@ from selenium.common.exceptions import TimeoutException, ElementClickIntercepted
 class UrbanRoutesPage:
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 25)
+        self.wait = WebDriverWait(driver, 15)
 
         self.from_input = (By.ID, 'from')
         self.to_input = (By.ID, 'to')
@@ -20,7 +20,7 @@ class UrbanRoutesPage:
         self.next_button = (By.CSS_SELECTOR, '.buttons > button')
         self.code_input = (By.CSS_SELECTOR, '.np-input > div.input-container')
         self.code_field = (By.ID, 'code')
-        self.confirm_button = (By.CLASS_NAME, 'submit')
+        self.confirm_button = (By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div[2]/form/div[2]/button[1]')
 
         self.payment_method = (By.CSS_SELECTOR, '.tariff-picker.shown .pp-button.filled .pp-text')
         self.add_card_button = (By.CSS_SELECTOR, '.payment-picker.open .pp-selector .pp-row.disabled .pp-title')

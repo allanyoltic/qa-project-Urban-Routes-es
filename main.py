@@ -28,6 +28,7 @@ class TestUrbanRoutes:
 
     def test_4_enter_sms_code(self):
         code = get_sms_code(phone_number)
+<<<<<<< HEAD
 
         if not code:
             print("No se recibió el código SMS.")
@@ -42,6 +43,10 @@ class TestUrbanRoutes:
         else:
             print("El código SMS no fue aceptado")
             assert False, "El código SMS no fue aceptado"
+=======
+        self.page.enter_sms_code(code)
+        assert self.page.is_sms_code_accepted()
+>>>>>>> a025abf (Cambios por segunda revisión)
 
     def test_5_add_credit_card(self):
         self.page.add_credit_card(card_number, card_cvv)
