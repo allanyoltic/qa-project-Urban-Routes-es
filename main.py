@@ -42,9 +42,7 @@ class TestUrbanRoutes:
             print("Prueba 4 superada")
         else:
             print("El código SMS no fue aceptado")
-            # self.driver.quit()
             assert False, "El código SMS no fue aceptado"
-            # pytest.fail("Algo falló... de nuevo")
 
     def test_5_add_credit_card(self):
         self.page.add_credit_card(card_number, card_cvv)
