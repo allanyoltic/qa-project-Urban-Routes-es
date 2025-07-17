@@ -31,7 +31,7 @@ class TestUrbanRoutes:
         code = get_sms_code(phone_number)
 
         if not code:
-            print("⚠️ No se recibió el código SMS.")
+            print("No se recibió el código SMS.")
             self.driver.quit()
             assert False, "No se recibió el código SMS"
 
@@ -39,9 +39,9 @@ class TestUrbanRoutes:
         is_accepted = self.page.is_sms_code_accepted()
 
         if is_accepted:
-            print("✅ Prueba 4 superada")
+            print("Prueba 4 superada")
         else:
-            print("❌ El código SMS no fue aceptado")
+            print("El código SMS no fue aceptado")
             # self.driver.quit()
             assert False, "El código SMS no fue aceptado"
             # pytest.fail("Algo falló... de nuevo")
