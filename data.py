@@ -1,4 +1,4 @@
-urban_routes_url = 'https://cnt-4542cb0b-4926-4331-bb42-494acfbafd85.containerhub.tripleten-services.com/?lng=es'
+urban_routes_url = 'https://cnt-51f10cc3-3b97-4e94-9aba-608f1ddc9c93.containerhub.tripleten-services.com/?lng=es'
 
 # Derivar automáticamente la base de la API desde la URL principal
 api_base_url = urban_routes_url.split('?')[0] + '/api/v1/number?number='

@@ -20,7 +20,7 @@ class UrbanRoutesPage:
         self.next_button = (By.CSS_SELECTOR, '.buttons > button')
         self.code_input = (By.CSS_SELECTOR, '.np-input > div.input-container')
         self.code_field = (By.ID, 'code')
-        self.confirm_button = (By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div[2]/form/div[2]/button[1]')
+        self.confirm_button = (By.XPATH, '/html/body/div/div/div[1]/div[2]/div[2]/form/div[2]/button[1]')
 
         self.payment_method = (By.CSS_SELECTOR, '.tariff-picker.shown .pp-button.filled .pp-text')
         self.add_card_button = (By.CSS_SELECTOR, '.payment-picker.open .pp-selector .pp-row.disabled .pp-title')
@@ -70,15 +70,13 @@ class UrbanRoutesPage:
         except Exception as e:
             print(f"[ERROR] Fallo al ingresar número de teléfono: {e}")
 
-    def wait_for_sms_input(self):
-        return self.wait.until(EC.presence_of_element_located(self.code_input))  # sin visibility, aún no lo escribimos
-
     def enter_sms_code(self, code):
         try:
             self.wait.until(EC.visibility_of_element_located(self.code_field)).send_keys(code)
             self.wait.until(EC.element_to_be_clickable(self.confirm_button)).click()
+            self.wait.until(EC.element_to_be_clickable(self.confirm_button)).click()
         except:
-            print("[ERROR] El campo de código no está interactuable.")
+            print("[ERROR] El campo de código no es interactuable.")
 
     def add_credit_card(self, number, cvv):
         try:
@@ -166,7 +164,6 @@ class UrbanRoutesPage:
         except:
             sms_form = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.number-picker.open > div.modal > div.section.active')))
             return sms_form.is_displayed()
-            return False
 
     def is_card_linked(self):
         try:
