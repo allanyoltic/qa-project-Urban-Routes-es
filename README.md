@@ -1,5 +1,5 @@
 # 🚕 Urban Routes - Automatización de pruebas de la aplicación web
-**Allan Yoltic Godinez Solis cohort 26 – Sprint 8 (TripleTen QA Engineer Bootcamp)**
+**Allan Yoltic Godinez Solis cohort 32 – Sprint 8 (TripleTen QA Engineer Bootcamp)**
 
 Este proyecto automatiza una serie de pruebas funcionales sobre el sitio web de **Urban Routes**, una aplicación de solicitud de transporte. La automatización fue realizada utilizando **Selenium WebDriver**, **Pytest** y una arquitectura basada en el patrón **Page Object Model (POM)**.
 
@@ -76,6 +76,8 @@ pytest main.py
 
 O bien, desde PyCharm puedes hacer clic derecho sobre `main.py` y seleccionar **"Run 'pytest in main'"**.
 
+**NO OLVIDES** ACTUALIZAR EL URL EN `data.py` con el generado por servidor en la plataforma de TripleTen en la práctica, de otra forma, no correrá el script.
+
 ---
 
 ## 🧪 Tecnologías y herramientas usadas
@@ -91,7 +93,7 @@ O bien, desde PyCharm puedes hacer clic derecho sobre `main.py` y seleccionar **
 ## 🙋‍♂️ Créditos
 
 Proyecto desarrollado como parte del bootcamp de QA Automation de **TripleTen**.
-Automatización realizada por Allan Yoltic Godinez Solis del cohort 26, con base en las prácticas enseñadas por la instructora Anely Doporto.
+Automatización realizada por Allan Yoltic Godinez Solis del cohort 32, con base en las prácticas enseñadas por la instructora Anely Doporto.
 
 ---
 
