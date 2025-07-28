@@ -150,10 +150,3 @@ class UrbanRoutesPage:
             EC.visibility_of_element_located(self.driver_info)
         )
         return driver_img.is_displayed()
-
-# helper dentro de la clase
-def _send_keys_js(self, element, value):
-    # escribe carácter a carácter para que dispare eventos
-    for ch in value:
-        element.send_keys(ch)
-        self.driver.execute_script("arguments[0].dispatchEvent(new Event('input', { bubbles: true }))", element)

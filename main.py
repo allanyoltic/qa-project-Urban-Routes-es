@@ -23,12 +23,10 @@ class TestUrbanRoutes:
         assert self.page.get_to_input_value() == address_to, "La dirección de destino no coincide"
 
     def test_2_select_comfort_tariff(self):
-        #self.test_1_enter_addresses()
         self.page.select_comfort_tariff()
         assert self.page.is_comfort_tariff_selected(), "La tarifa Comfort no fue seleccionada correctamente"
 
     def test_3_enter_phone_number(self):
-        #self.test_2_select_comfort_tariff()
         self.page.enter_phone_number()
         actual_number = data.phone_number
         phone_number_written = self.page.is_phone_input_filled_correctly()
@@ -36,17 +34,14 @@ class TestUrbanRoutes:
         WebDriverWait(self.driver, timeout=5)
 
     def test_4_add_credit_card(self):
-        #self.test_2_select_comfort_tariff()
         self.page.add_credit_card(card_number, card_cvv)
         assert self.page.is_card_linked(), "La tarjeta no fue vinculada correctamente"
 
     def test_5_write_driver_message(self):
-        #self.test_4_add_credit_card()
         self.page.write_driver_message(message_for_driver)
         assert self.page.is_message_sent(message_for_driver), "El mensaje no se ingresó correctamente"
 
     def test_6_toggle_blanket_and_tissues(self):
-        #self.test_3_enter_phone_number()
         self.page.toggle_blanket_and_tissues()
         assert self.page.is_blanket_and_tissues_selected(), "La opción de manta y pañuelos no fue activada"
 
@@ -55,7 +50,6 @@ class TestUrbanRoutes:
         assert self.page.is_ice_cream_added(), "No se agregaron 2 helados"
 
     def test_8_taxi_seeker_appears(self):
-        #self.test_7_add_ice_cream()
         self.page.confirm_trip()
         assert self.page.is_taxi_modal(), "No apareció el modal para buscar un taxi"
 
